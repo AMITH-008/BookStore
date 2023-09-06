@@ -12,6 +12,15 @@ export const addBook = async (request, response) => {
         response.status(200).send("Book Added");
     }catch(error){
         response.status(500).send(error);
+    }  
+}
+
+export const getBooks = async (request, response) => {
+    try{
+        const allBooks = await Book.find();
+        response.status(200).send(allBooks);
+    }catch(err){
+        response.status(500).send(err);
     }
     
 }
