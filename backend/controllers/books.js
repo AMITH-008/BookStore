@@ -63,3 +63,14 @@ export const updateBook = async (request, response) => {
         response.status(500).send(err);
     }
 }
+
+//Delete A Book
+export const deleteBook = async (request, response) => {
+    try{
+        const {id} = request.params;
+        await Book.findByIdAndDelete(id);
+        response.status(200).send("Book Deleted");
+    }catch(err){
+        response.status(500).send(err);
+    }
+}
