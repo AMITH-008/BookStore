@@ -1,5 +1,7 @@
 import Book from '../models/books.js';
 
+
+//Add A New Book
 export const addBook = async (request, response) => {
     const data = request.body;
     if(!data.author || !data.title || !data.publishYear) {
@@ -15,6 +17,7 @@ export const addBook = async (request, response) => {
     }  
 }
 
+//Fetch All Books
 export const getBooks = async (request, response) => {
     try{
         const allBooks = await Book.find();
@@ -28,6 +31,7 @@ export const getBooks = async (request, response) => {
     
 }
 
+//Fetch a single Book
 export const getBook = async (request, response) => {
     try{
         const {id} = request.params;
@@ -39,4 +43,23 @@ export const getBook = async (request, response) => {
         response.status(500).send(err);
     }
     
+}
+
+//Update A Book
+export const updateBook = async (request, response) => {
+    try{
+        const {id} = request.params;
+        const  data = request.body;
+
+        if(!data.author || !data.title || !data.publishYear) {
+            response.status(400).json({error:"Please Fill All The Details"});
+            return;
+        }
+
+        const updatedBook = await Book.findByIdAndUpdate(id, data);
+        console.log(updatedBook);
+        response.status(200).send(updatedBook);
+    }catch(err){
+        response.status(500).send(err);
+    }
 }
