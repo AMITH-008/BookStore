@@ -18,10 +18,25 @@ export const addBook = async (request, response) => {
 export const getBooks = async (request, response) => {
     try{
         const allBooks = await Book.find();
-        response.status(200).send(allBooks);
+        response.status(200).json({
+            count:allBooks.length,
+            data:allBooks
+        });
     }catch(err){
         response.status(500).send(err);
     }
     
 }
 
+export const getBook = async (request, response) => {
+    try{
+        const {id} = request.params;
+        const book = await Book.findById(id);
+        response.status(200).json({
+            data:book
+        });
+    }catch(err){
+        response.status(500).send(err);
+    }
+    
+}
