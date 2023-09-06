@@ -1,12 +1,15 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
+import router from './api/books.js';
 
 
 
 const app = express();
 dotenv.config();
 
+app.use(express.urlencoded())
+app.use("/books", router);
 
 
 const port = process.env.PORT;
