@@ -68,9 +68,12 @@ export const updateBook = async (request, response) => {
 export const deleteBook = async (request, response) => {
     try{
         const {id} = request.params;
-        await Book.findByIdAndDelete(id);
-        response.status(200).send("Book Deleted");
+        const result = await Book.findByIdAndDelete(id);
+        if(!result){
+            return response.status(404).send({message:'Book Nott Found'});
+        }
+        response.status(200).send({message:"Book Deleted"});
     }catch(err){
-        response.status(500).send(err);
+        response.status(500).send({message:err.message});
     }
 }
