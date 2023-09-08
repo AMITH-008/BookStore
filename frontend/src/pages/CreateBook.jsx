@@ -28,7 +28,6 @@ const CreateBook = () => {
           .then(() => {
             setLoading(false);
             navigate('/');
-            alert('Book Added');
           })
           .catch(err => {
             setLoading(false);
