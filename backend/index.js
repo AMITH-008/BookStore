@@ -18,11 +18,11 @@ app.use(express.urlencoded())
 //Option1: Allow All origins with default of cors(*)
 app.use(cors());
 //Option2: Allow Custom Origins
-app.use(cors({
-    origin: 'http://localhost:3000',
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    allowedHeaders:['Content-Type']
-}))
+// app.use(cors({
+//     origin: 'http://localhost:3000',
+//     methods: ['GET', 'POST', 'PUT', 'DELETE'],
+//     allowedHeaders:['Content-Type']
+// }))
 
 //Middleware for routing requests on Books
 app.use("/books", router);
